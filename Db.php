@@ -76,7 +76,6 @@ class Db extends \app\model\Model {
     public function insert($table = null, $data = null) {
         if(!is_string($table))  throw new Exception('Table given is not a sting');
         if(!is_array($data))    throw new Exception('Data given is not an array!');
-
         $table = $this->escape($table, false);
         $data = $this->escape($data);
         $fields = "(";
@@ -176,7 +175,7 @@ class Db extends \app\model\Model {
         $q = "DELETE FROM ". $table;
         
         if(isset($query) && is_array($query)) {
-            $query = $this->setValueList($query);
+            $query = $this->whereValueList($query);
             $q .= " WHERE ". $query;
         }
 
